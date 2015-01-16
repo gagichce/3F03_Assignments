@@ -8,10 +8,11 @@
 
 AS=nasm
 ASFLAGS= -f elf
-CFLAGS= 
+CFLAGS= -m32
 CC=gcc
 CXX=g++
 CXXFLAGS=
+LDFLAGS= -m32
 
 .asm.o:
 	$(AS) $(ASFLAGS) $*.asm
@@ -31,7 +32,7 @@ math : driver.o math.o asm_io.o
 	$(CC) $(CFLAGS) -omath driver.o math.o asm_io.o
 
 first : driver.o first.o asm_io.o
-	$(CC) $(CFLAGS) -ofirst driver.o first.o asm_io.o
+	$(CC) $(CFLAGS) -o first driver.o first.o asm_io.o
 
 sub1 : driver.o sub1.o asm_io.o
 	$(CC) $(CFLAGS) -osub1 driver.o sub1.o asm_io.o
