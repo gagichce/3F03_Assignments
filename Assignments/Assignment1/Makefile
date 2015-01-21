@@ -23,18 +23,17 @@ LDFLAGS= -m32
 .c.o:
 	$(CC) -c $(CFLAGS) $*.c
 
-all: a1p5 asm_io.o
+all: a1asm asm_io.o
 
-a1p5 : driver.o a1p5.o asm_io.o
-	$(CC) $(CFLAGS) -o a1p5 driver.o a1p5.o asm_io.o
+a1asm: driver.o a1asm.o asm_io.o
+	$(CC) $(CFLAGS) -o a1asm driver.o a1asm.o asm_io.o
 
 asm_io.o : asm_io.asm
 	$(AS) $(ASFLAGS) -d ELF_TYPE asm_io.asm
 
-a1p5.o : asm_io.inc a1p5.asm
+a1p5.o : asm_io.inc a1asm.asm
 
 driver.o : driver.c
-
 
 clean :
 	rm *.o
