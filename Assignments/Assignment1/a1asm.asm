@@ -2,12 +2,12 @@
 
 segment .data
 
-promt1 db "Enter a number: ", 0
-outmsg1 db "You entered: ", 0
+promt1 db "Enter the value of x: ", 0
+outmsg1 db "y = ", 0
 
 segment .bss
 
-input1 resd 1
+x resd 0
 
 segment .text
 	global asm_main
@@ -19,16 +19,32 @@ asm_main:
 	mov eax, promt1
 	call print_string
 	call read_int
+
 	;move input to its place
-	mov [input1], eax
+	mov [x], eax
+	mov ebx, 0
+	dump_regs 1
+	mov ebx, [x]
+
+	;subtract 3
+	sub ebx, 3 
 	
+	imul ebx, [x]
+
+	add ebx, 1
+
+	imul ebx, [x]
+
+	sub ebx, 10
+	
+	dump_regs 1
 	mov eax, outmsg1
 	call print_string
 
-	mov eax, [input1]
+	mov eax, ebx
 
 	call print_int	
-
+	call print_nl
 	popa
 	mov eax, 0
 	leave
