@@ -31,7 +31,7 @@ a1asm: driver.o a1asm.o asm_io.o
 asm_io.o : asm_io.asm
 	$(AS) $(ASFLAGS) -d ELF_TYPE asm_io.asm
 
-a1p5.o : asm_io.inc a1asm.asm
+a1asm.o : asm_io.inc a1asm.asm
 
 driver.o : driver.c
 
