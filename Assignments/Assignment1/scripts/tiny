@@ -1,0 +1,13 @@
+#!/bin/bash
+#maximum size of file in bytes. for this assignment it is 100 bytes as per the assignment spec
+tinymaxsize=100
+
+#helps with the empty directory case
+shopt -s nullglob
+
+for file in *; do
+	if [ `wc -c $file | awk '{print $1}'` -le "$tinymaxsize" ] 
+		then
+			echo `wc -c $file`
+	fi 	
+done
