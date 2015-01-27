@@ -1,0 +1,11 @@
+#!/bin/bash
+age=`stat -c %Y $1`
+
+shopt -s nullglob
+
+for file in *; do
+	if [ `stat -c %Y $file` -gt "$age" ]
+		then
+			echo "$file"
+	fi
+done
