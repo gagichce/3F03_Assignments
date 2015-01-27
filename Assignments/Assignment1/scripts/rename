@@ -1,9 +1,7 @@
 #!/bin/bash
 
-if [ -z $1 ] 
+if [ $# -eq 3 ] 
 then
-	echo "no arugment given or bad argument"
-else
 	if [ -e $1 ]
 		then age=`stat -c %Y $1`
 
@@ -17,4 +15,5 @@ else
 		done
 		else echo "$1 is not a valid file"
 	fi
+else echo "wrong number of input arguments. Should be 3, found $#"
 fi
