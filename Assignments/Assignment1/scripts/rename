@@ -1,19 +1,11 @@
 #!/bin/bash
 
-if [ $# -eq 3 ] 
+if [ $# -ge 3 ] 
 then
-	if [ -e $1 ]
-		then age=`stat -c %Y $1`
-
-		shopt -s nullglob
-
-		for file in *; do
-			if [ `stat -c %Y $file` -gt "$age" ]
-				then
-					echo "$file"
-			fi
-		done
-		else echo "$1 is not a valid file"
-	fi
+	shopt -s nullglob
+	echo "$@"
+	for file in `$@ | tail -n +2`; do
+		echo $3
+	done
 else echo "wrong number of input arguments. Should be 3, found $#"
 fi
