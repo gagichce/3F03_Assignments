@@ -4,7 +4,7 @@ if [ $# -ge 3 ]
 then
 	shopt -s nullglob
 	for file in ${@:3}; do
-		echo "from loop" $file
+		mv $file ${file/$1/$2}
 	done
 else echo "wrong number of input arguments. Should be 3 or more, found $#"
 fi
