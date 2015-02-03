@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z $1 ] 
+then
+	echo "no arugment given or bad argument"
+else
+	if [ -e $1 ]
+		then age=`stat -c %Y $1`
+
+		shopt -s nullglob
+
+		for file in *; do
+			if [ `stat -c %Y $file` -gt "$age" ]
+				then
+					echo "$file"
+			fi
+		done
+		else echo "$1 is not a valid file"
+	fi
+fi

@@ -16,14 +16,14 @@ asm_main:
 	enter 0,0
 	pusha
 	;print the promt
-	mov eax, promt1
-	call print_string
+	;mov eax, promt1
+	;call print_string
 	call read_int
 
 	;move input to its place
 	mov [x], eax
 	mov ebx, 0
-	dump_regs 1
+	;dump_regs 1
 	mov ebx, [x]
 
 	;subtract 3
@@ -37,9 +37,9 @@ asm_main:
 
 	sub ebx, 10
 	
-	dump_regs 1
-	mov eax, outmsg1
-	call print_string
+	;dump_regs 1
+	;mov eax, outmsg1
+	;call print_string
 
 	mov eax, ebx
 
