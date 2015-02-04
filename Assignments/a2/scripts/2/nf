@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#using find because it finds files, ignores directories and finds hidden files which start with .
+
+find . -maxdepth 1 -type f | wc -l
