@@ -1,13 +1,23 @@
 #!/bin/bash
 
-if [ "$#" -gt 1 ] ; then
-	echo "no"
+#I know the problem statement suggests I should use regex to solve this, but I think regex is boring and most of the time completely unmaintainable.. I decided to take this alternative approach.
+
+#First we assume the given variable name is valid. Innocent until proven guitly really.
+
+result="yes"
+
+#Next we make sure the right number of parameters were given. Also check for space, that can break this method...
+
+if [ "$#" -ne 1 ] || [[ $1 == *" "* ]] ; then
+	result="no"
 fi
 
-notValid(){
-	
+#This is effectively a try catch loop. I let the shell try to assign a value to the variable name given. If it can, it continues. If it can't, it redirects any error message to null and using the exit code the value of result is changed.
+{
+	`export $1="isValid" > /dev/null 2>&1` 
+} || {
+	result="no"
 }
 
-isValid(){
-	
-}
+#print result to screen
+echo $result
