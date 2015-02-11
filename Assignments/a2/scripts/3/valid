@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$#" -gt 1 ] ; then
+	echo "no"
+fi
+
+notValid(){
+	
+}
+
+isValid(){
+	
+}
