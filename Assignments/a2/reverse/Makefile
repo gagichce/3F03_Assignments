@@ -23,15 +23,15 @@ LDFLAGS= -m32
 .c.o:
 	$(CC) -c $(CFLAGS) $*.c
 
-all: a2asm asm_io.o
+all: reverse asm_io.o
 
-a2asm: driver.o a2asm.o asm_io.o
+reverse: driver.o reverse.o asm_io.o
 	$(CC) $(CFLAGS) -o $@ $?
 
 asm_io.o : asm_io.asm
 	$(AS) $(ASFLAGS) -d ELF_TYPE $?
 
-a2asm.o : asm_io.inc a2asm.asm
+reverse.o : asm_io.inc reverse.asm
 
 driver.o : driver.c
 
