@@ -16,14 +16,53 @@ asm_main:
 	
 	mov eax, stringlabel
 
-	call readstring
+	call reverse
 
-	call strlen
+	mov eax, stringlabel	
 	
-	call print_int
+	call print_char
 
 	popa
 	mov eax, 0
+	leave
+	ret
+
+reverse:
+
+	enter 0,0
+	pusha
+
+	mov eax, stringlabel
+
+	call readstring
+
+	call strlen
+
+	sub eax, 1
+
+	imul eax, 4	
+
+	add eax, stringlabel	
+
+	mov ebx, stringlabel
+
+loopRev:
+
+	;reverse the chars
+	mov ecx, [eax]
+	mov edx, [ebx]
+	mov [ebx], ecx
+	mov [eax], edx
+	
+	dump_regs 1
+
+	add dword ebx, 4
+	sub dword eax, 4
+
+	cmp eax, ebx
+	jg loopRev
+
+	popa
 	leave
 	ret
 
