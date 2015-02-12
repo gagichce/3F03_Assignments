@@ -16,13 +16,11 @@ asm_main:
 	
 	mov eax, stringlabel
 
-	dump_regs 1
+	call readstring
 
-	call readstring	
-
-	dump_regs 1	
-
-	mov eax, stringlabel
+	call strlen
+	
+	call print_int
 
 	popa
 	mov eax, 0
@@ -32,14 +30,20 @@ asm_main:
 strlen:
 	enter 0,0
 	push ebx
-	push eax
 
 	mov ebx, eax
 	mov eax, 0
 
+loops:
+	cmp dword [ebx] , 0
 	
+	je short done
 
-	pop eax
+	sub ebx, 4
+	add eax, 1
+	jmp loops
+
+done:
 	pop ebx
 	leave
 	ret
@@ -51,7 +55,6 @@ readstring:
 	mov ebx, eax
 
 readSection:
-	dump_regs 1
 	call read_char
 
 	mov [ebx], eax	
@@ -61,6 +64,7 @@ readSection:
 
 	jne readSection
 	
+	call read_char
 	pop eax
 	pop ebx
 	leave
