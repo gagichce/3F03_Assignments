@@ -14,7 +14,8 @@ fi
 
 #This is effectively a try catch loop. I let the shell try to assign a value to the variable name given. If it can, it continues. If it can't, it redirects any error message to null and using the exit code the value of result is changed.
 {
-	`export $1="isValid" > /dev/null 2>&1` 
+	export $1="yes" > /dev/null 2>&1
+
 } || {
 	result="no"
 }
