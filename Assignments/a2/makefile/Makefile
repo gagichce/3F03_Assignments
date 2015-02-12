@@ -1,7 +1,10 @@
-#
-# Linux makefile
-# Use with make 
-#
+#	Changes made:
+# 	removed .cpp rule, only needed for one line
+#	simplified rule lines by replacing targets and prereqs to $@ and $? where possible
+#	removed most rules as the general suffix rules are sufficeint.
+#	made custom rule to combine build for prime math first sub1 sub2 sub3
+#	combined sub1.o sub2.o sub3.o sub4.o main4.o into one, all relied on asm_io.inc
+#	did not remove whitespace between lines. readability > less lines
 
 .SUFFIXES:
 .SUFFIXES: .o .asm .cpp .c
