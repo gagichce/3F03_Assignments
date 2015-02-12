@@ -14,13 +14,7 @@ asm_main:
 	enter 0,0
 	pusha
 	
-	mov eax, stringlabel
-
-	call reverse
-
-	mov eax, stringlabel	
-	
-	call print_char
+	;left this blank
 
 	popa
 	mov eax, 0
@@ -55,10 +49,10 @@ loopRev:
 	mov [eax], edx
 	
 	dump_regs 1
-
+	;move pointers to new characters
 	add dword ebx, 4
 	sub dword eax, 4
-
+	;check to see if more swapping is required
 	cmp eax, ebx
 	jg loopRev
 
@@ -73,6 +67,7 @@ strlen:
 	mov ebx, eax
 	mov eax, 0
 
+	;iterate until null character is found
 loops:
 	cmp dword [ebx] , 0
 	
@@ -93,6 +88,7 @@ readstring:
 	push eax
 	mov ebx, eax
 
+	;continually read a character until the null character is entered
 readSection:
 	call read_char
 
@@ -103,7 +99,10 @@ readSection:
 
 	jne readSection
 	
+	;read the enter character the user pressed. not sure if this will cause problems as 
 	call read_char
+	
+	;restore eax
 	pop eax
 	pop ebx
 	leave
