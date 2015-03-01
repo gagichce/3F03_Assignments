@@ -5,11 +5,12 @@
 
 .SUFFIXES:
 .SUFFIXES: .o .asm .cpp .c
+.global: rand
 
 ASSIGN=a3
 AS=nasm
 ASFLAGS= -f elf
-CFLAGS= -m32
+CFLAGS= -m32 -std=gnu99
 CC=gcc
 CXX=g++
 CXXFLAGS= -m32
