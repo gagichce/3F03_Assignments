@@ -27,10 +27,6 @@ shellsort:
 	;take n  store it in the local variable	
 	mov eax, [ebp + 12]
 	mov [ebp - 4], eax
-	mov ecx, [ebp + 8]
-	dump_regs 0
-	mov dword edx, 0
-	mov ecx, [ebp + 8]
 	;add dword [eax + 8], 25
 	;outmost for loop
 gaploop:
@@ -40,7 +36,7 @@ gaploop:
 	mov dword edx, 0
 	div ebx
 	mov [ebp - 4], eax
-	dump_regs 1
+	;dump_regs 1
 
 	;ensure gap is greater than 0; z > 0
 	cmp dword [ebp - 4], 0
@@ -70,9 +66,7 @@ jloop:
 	
 	mov eax, [ebp + 8] 
 	mov ebx, [ebp - 12]
-	add eax, ebx
-	add eax, ebx
-	add eax, ebx
+	lea ebx, [ebx * 4]
 	add eax, ebx ;eax has address of A[j]
 	mov ebx, [ebp - 4]
 	lea ebx, [eax + 4 * ebx] ;ebx has address of A[j + gap]

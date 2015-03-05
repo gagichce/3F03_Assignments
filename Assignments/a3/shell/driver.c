@@ -16,15 +16,13 @@ int main()
 		int length = i*10000000;
 		ptr = (int*)malloc(length*sizeof(int));
 		if(ptr==NULL){
-			printf("Memory could not be allocated! You must download more rams!"); 
+			printf("Memory could not be allocated! You must download more rams!\n"); 
 			return 0;
 		}
 
 		genRandArray(ptr, length);
-		//print(ptr, length);
 		shellsort2(ptr, length);
-		//printf("\n");
-		//print(ptr, length);		
+	
 		checkSorting(ptr, length);
 
 		printf("Time is : %d\n", clock());		
