@@ -4,6 +4,7 @@
 void genRandArray(int * A, int n);
 int asm_main();
 int shellsort(int * A, int n);
+void shellsort2(int * A, int n);
 
 int main()
 {
@@ -20,8 +21,11 @@ int main()
 		}
 
 		genRandArray(ptr, length);
-	
-		shellsort(ptr, length);		
+		//print(ptr, length);
+		shellsort2(ptr, length);
+		//printf("\n");
+		//print(ptr, length);		
+		checkSorting(ptr, length);
 
 		printf("Time is : %d\n", clock());		
 
@@ -41,4 +45,35 @@ void genRandArray(int * A, int n)
 	}
 	//flushin' because buffers
 	fflush(stdout);
+}
+
+void checkSorting(int * A, int n){
+	int i;
+	for (i = 0; i < n-1; i++){
+		if(A[i] > A[i+1]){
+			printf("Error in the sort!");
+			exit(-1);
+		}
+	}
+}
+
+void print(int * A, int n){
+	int i;
+	for (i = 0; i < n; i++){
+		printf("%d\n", A[i]);
+	}
+}
+
+void shellsort2( int * A, int n )
+{
+	int gap, i, j, temp;
+	for(gap = n/2; gap > 0; gap /=2){
+		for( i = gap; i < n; i++){
+			for(j = i - gap; j >= 0 && A[j] > A[j + gap]; j -= gap){
+				temp = A[j];
+				A[j] = A[j + gap];
+				A[j + gap] = temp;
+			}
+		}
+	}
 }

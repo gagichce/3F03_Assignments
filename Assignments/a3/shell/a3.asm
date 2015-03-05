@@ -27,7 +27,11 @@ shellsort:
 	;take n  store it in the local variable	
 	mov eax, [ebp + 12]
 	mov [ebp - 4], eax
+	mov ecx, [ebp + 8]
 	dump_regs 0
+	mov dword edx, 0
+	mov ecx, [ebp + 8]
+	;add dword [eax + 8], 25
 	;outmost for loop
 gaploop:
 	;take gap and divide it by 2
@@ -63,22 +67,32 @@ jloop:
 	;check j>=0
 	cmp dword [ebp - 12], 0
 	jl endjloop
-
-	;check A[j] > A[j+gap]
-	mov ebx, [ebp + 8]
-	add ebx, [ebp - 12] ;the actual address of A[j] is loaded
 	
-	mov ecx, [ebp - 4]
-	add ecx, ebx ; the actual address of A[j + gap]
-
-	mov eax, [ebx]
-	push eax ; value of A[j] is on the stack
+	mov eax, [ebp + 8] 
+	mov ebx, [ebp - 12]
+	add eax, ebx
+	add eax, ebx
+	add eax, ebx
+	add eax, ebx ;eax has address of A[j]
+	mov ebx, [ebp - 4]
+	lea ebx, [eax + 4 * ebx] ;ebx has address of A[j + gap]
 	
-	mov eax, [ecx]
-	mov [ebx], eax ; value of A[j] is now A[j + gap]
+	mov ecx, [eax] ;value of A[j]
+	
+	cmp dword ecx, [ebx]
+	jle near endjloop
+	
+	;dump_regs 5
 
-	pop eax
-	mov [ecx] , eax ; A[j + gap] is now the value of the temp
+	push ecx ;value of A[j] on stack
+
+	;A[j] = A[j + gap]
+	mov ecx, [ebx]
+	mov [eax], ecx
+
+	pop ecx
+
+	mov [ebx], ecx
 
 	;perform j-=gap and jump to start of for loop
 	mov eax, [ebp - 4]
