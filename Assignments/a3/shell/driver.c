@@ -5,6 +5,10 @@ void genRandArray(int * A, int n);
 int asm_main();
 int shellsort(int * A, int n);
 void shellsort2(int * A, int n);
+void shellsort3(int * A, int n);
+int comp (const void * a, const void * b);
+void checkSorting(int * A, int n);
+int clock();
 
 int main()
 {
@@ -14,6 +18,7 @@ int main()
 	for(int i = 1; i < 11; i++){
 		int *ptr;
 		int length = i*10000000;
+		
 		ptr = (int*)malloc(length*sizeof(int));
 		if(ptr==NULL){
 			printf("Memory could not be allocated! You must download more rams!\n"); 
@@ -21,13 +26,14 @@ int main()
 		}
 
 		genRandArray(ptr, length);
-		shellsort2(ptr, length);
-	
+		int startTime = clock();		
+		shellsort3(ptr, length);
+		int totalT = clock() - startTime;
 		checkSorting(ptr, length);
 
-		printf("Time is : %d\n", clock());		
+		printf("%d %d\n", length, totalT);		
 
-		printf("%d\n", *(ptr));
+		//printf("%d\n", *(ptr));
 		free(ptr);
 	}	
 
@@ -37,7 +43,7 @@ int main()
 //this assumes the memory has already been allocated, just needs to be filled
 void genRandArray(int * A, int n)
 {
-	printf("making array of rands %d long\n", n);
+	//printf("making array of rands %d long\n", n);
 	for (int i = 0; i < n; i++){
 		*(A + i) = rand();
 	}
@@ -75,3 +81,15 @@ void shellsort2( int * A, int n )
 		}
 	}
 }
+
+int comp (const void * a, const void * b)
+{
+	return ( *(int*)a - *(int*)b );
+}
+
+void shellsort3( int * A, int n )
+{
+	qsort(A, n, sizeof(int), comp);
+}
+
+

@@ -10,7 +10,7 @@
 ASSIGN=a3
 AS=nasm
 ASFLAGS= -f elf
-CFLAGS= -m32 -std=gnu99
+CFLAGS= -m32 -std=gnu99 -O2
 CC=gcc
 CXX=g++
 CXXFLAGS= -m32

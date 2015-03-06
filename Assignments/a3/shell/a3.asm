@@ -103,6 +103,6 @@ endiloop:
 
 	jmp gaploop
 endsort:
-	dump_regs 3
+	;dump_regs 3
 	leave 
 	ret
