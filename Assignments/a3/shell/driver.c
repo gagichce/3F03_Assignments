@@ -26,12 +26,15 @@ int main()
 		}
 
 		genRandArray(ptr, length);
-		int startTime = clock();		
-		shellsort3(ptr, length);
-		int totalT = clock() - startTime;
+		//print(ptr, length);
+		clock_t startTime = clock();		
+		shellsort(ptr, length);
+		clock_t endT = clock();
+		//print(ptr, length);
+		double totalT = (double) (endT - startTime)/1000000;
 		checkSorting(ptr, length);
 
-		printf("%d %d\n", length, totalT);		
+		printf("%d %f\n", length, totalT);		
 
 		//printf("%d\n", *(ptr));
 		free(ptr);
