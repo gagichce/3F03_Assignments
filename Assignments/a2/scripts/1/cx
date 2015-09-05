@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#input the given parameters into chmod command
+chmod +x $@

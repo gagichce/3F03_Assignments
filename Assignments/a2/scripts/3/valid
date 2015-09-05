@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#I know the problem statement suggests I should use regex to solve this, but I think regex is boring and most of the time completely unmaintainable.. I decided to take this alternative approach. See the comments at the bottom for additional reasoning.
+
+#First we assume the given variable name is valid. Innocent until proven guitly really.
+
+result="yes"
+
+#Next we make sure the right number of parameters were given. Also check for space, that can break this method...
+
+if [ "$#" -ne 1 ] || [[ $1 == *" "* ]] ; then
+	result="no"
+fi
+
+#This is effectively a try catch loop. I let the shell try to assign a value to the variable name given. If it can, it continues. If it can't, it redirects any error message to null and using the exit code the value of result is changed.
+{
+	#assign yes just incase someone inputs "result". If it works, 
+	export $1="yes" > /dev/null 2>&1 
+} || {
+	result="no"
+}
+
+
+#print result to screen
+echo $result
+
+# Ending Remarks:
+#	I wanted to take this approach because I assumed keywords were reserved in bash. Using just a regex wouldn't be enough if that were the case, I would also have to check if the variable name was also a keyword. But it turns out something like this is not only VALID.. but DOESN'T CAUSE ANY PROBLEMS WHAT SO EVER.
+
+#	echo="test"
+#	echo $echo
+
+#	Output:
+#	$ test
+
+# So yes. echo is a valid keyword. W T F.
